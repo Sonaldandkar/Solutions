@@ -235,7 +235,80 @@ int main()
     {
         cout << numbers[i] << " ";
     }
-    /* Vector-Sort in C++ - Hacker Rank Solution End */
+   
     return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Nishanth
+
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() 
+{
+    
+    int n,i;
+    cin >> n;
+    vector<int> numbers(n, 0);
+    for(i = 0; i < n; i++) 
+    {
+        cin >> numbers[i];
+    }
+
+    sort(numbers.begin(), numbers.end());
+
+    for(i = 0; i < n; i++) 
+    {
+        cout << numbers[i] << " ";
+    }
+   
+    return 0;
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Naveen
+
+#include <algorithm>
+#include <iostream>
+#include <vector>
+#include <numeric> //For accumulate operation
+using namespace std;
+ 
+int main()
+{
+    // Initializing vector with array values
+    int arr[] = {10, 20, 5, 23 ,42 , 15};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    vector<int> vect(arr, arr+n);
+ 
+    cout << "Vector is: ";
+    for (int i=0; i<n; i++)
+        cout << vect[i] << " ";
+ 
+    // Sorting the Vector in Ascending order
+    sort(vect.begin(), vect.end());
+     cout << "\nVector after sorting is: ";
+    for (int i=0; i<n; i++)
+       cout << vect[i] << " ";
+ 
+    // Reversing the Vector
+    reverse(vect.begin(), vect.end());
+ 
+    cout << "\nVector after reversing is: ";
+    for (int i=0; i<6; i++)
+        cout << vect[i] << " ";
+        cout << "\nMaximum element of vector is: ";
+    cout << *max_element(vect.begin(), vect.end());
+ 
+    cout << "\nMinimum element of vector is: ";
+    cout << *min_element(vect.begin(), vect.end());
+ return 0;
 }
 
