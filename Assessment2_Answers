@@ -1,0 +1,549 @@
+
+Q.1) Write a C++ program to define a class employee having members Emp-id, Emp-name, basic salary and functions accept() and display(). Calculate DA=25% of basic salary, HRA=800, I-tax=15% of basic salary. Display the payslip using appropriate output format.
+Solution:
+#include<iostream>
+using namespace std;
+
+class Employee
+{
+        int eid;
+        char ename[100];
+        float basic_salary, hra, da, i_tax, net_salary;
+
+        public:
+        void accept_details()
+        {
+                cout<<"\n Enter Employee Id : ";
+                cin>>eid;
+                cout<<"\n Enter Employee Name : ";
+                cin>>ename;
+                cout<<"\n Enter Basic Salary : ";
+                cin>>basic_salary;
+
+                hra = 800;
+                da = 0.25 * basic_salary;
+                i_tax = 0.15 * basic_salary;
+                net_salary = basic_salary + da + hra - i_tax;
+        }
+        void display_details()
+        {
+                cout<<"\n ----------------------- ";
+                cout<<"\n Employee Id        : "<<eid;
+                cout<<"\n Employee Name  : "<<ename;
+                cout<<"\n Basic Salary         : "<<basic_salary;
+                cout<<"\n HRA                      : "<<hra;
+                cout<<"\n DA                        : "<<da;
+                cout<<"\n I-Tax                      : "<<i_tax;
+                cout<<"\n Net Salary             : "<<net_salary;
+        }
+};
+int main()
+{
+        Employee e;
+        e.accept_details();
+        e.display_details();
+        return 0;
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.2) Write a to read time in HH:MM:SS format and convert into total seconds using class
+Solution: 
+#include <iostream>
+#include <iomanip>
+using namespace std;
+class Time
+{
+private:
+ int seconds;
+int hh,mm,ss;
+  public:
+  void getTime(void);
+void convertIntoSeconds(void);
+void displayTime(void);
+};
+void Time::getTime(void)
+{
+ cout << "Enter time:" << endl;
+ cout << "Hours?   ";          cin >> hh;
+cout << "Minutes? ";          cin >> mm;
+  cout << "Seconds? ";          cin >> ss;
+}
+void Time::convertIntoSeconds(void)
+{
+   seconds = hh*3600 + mm*60 + ss;
+}
+void Time::displayTime(void)
+{
+ cout << "The time is = " << setw(2) << setfill('0') << hh << ":"
+
+                             << setw(2) << setfill('0') << mm << ":"
+
+                             << setw(2) << setfill('0') << ss << endl;
+cout << "Time in total seconds: " << seconds;
+
+}
+int main()
+{
+ Time T; //creating objects
+ T.getTime();
+  T.convertIntoSeconds();
+  T.displayTime();
+    return 0;
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.3) Write a C++ program to check whether given two strings are numeric or not?
+Solution:
+#include <iostream>
+using namespace std;
+
+int isNumericString(unsigned char *num)
+{
+	int i=0;
+    while (*(num+i)) {
+        if (*(num+i) >= '0' && *(num+i) <= '9')
+            i++;
+        else
+            return 0;
+    }
+    return 1;
+}
+
+int main()
+{
+	int ret = 0;
+	unsigned char str1[] = "1234";
+	unsigned char str2[] = "ABCD";
+	
+	ret = isNumericString(str1);
+	if(ret)
+		cout<<"It is numeric string"<<endl;
+	else
+		cout<<"It is not numeric string"<<endl;
+	
+	ret = isNumericString(str2);
+	if(ret)
+		cout<<"It is numeric string"<<endl;
+	else
+		cout<<"It is not numeric string"<<endl;	
+	
+	return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.4) computing rectangle area using class and objects.
+Solution:
+#include <iostream>
+
+using namespace std;
+/*
+ * Create classes Rectangle and RectangleArea
+ */
+class Rectangle{
+    protected:
+        int width;
+        int height;
+
+    public:
+        virtual void display() const{
+            cout<< width <<' ' << height << endl;
+        }
+};
+class RectangleArea : public Rectangle {
+    public:
+        void display() const override {
+            cout << (width * height) << endl;
+        }
+        void read_input(){
+            cin >> width >> height;
+        }
+};
+
+int main()
+{
+    /*
+     * Declare a RectangleArea object
+     */
+    RectangleArea r_area;
+    
+    /*
+     * Read the width and height
+     */
+    r_area.read_input();
+    
+    /*
+     * Print the width and height
+     */
+    r_area.Rectangle::display();
+    
+    /*
+     * Print the area
+     */
+    r_area.display();
+    
+    return 0;
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q.5) Write a C++ program to find the area and volume of the room by using class and object
+
+Solution:
+
+#include <iostream>
+using namespace std;
+
+// create a class
+class Room {
+
+   public:
+    double length;
+    double breadth;
+    double height;
+
+    double calculateArea() {
+        return length * breadth;
+    }
+
+    double calculateVolume() {
+        return length * breadth * height;
+    }
+};
+
+int main() {
+
+    // create object of Room class
+    Room room1;
+	cout<<"Enter the room length = "<<endl;
+    cin>>room1.length;
+    cout<<"Enter the room breadth = "<<endl;
+    cin>>room1.breadth;
+    cout<<"Enter the room height = "<<endl;
+     cin>>room1.height;
+
+    // assign values to data members
+    room1.length = 42.5;
+    room1.breadth = 30.8;
+    room1.height = 19.2;
+
+    // calculate and display the area and volume of the room
+    cout << "Area of Room =  " << room1.calculateArea() << endl;
+    cout << "Volume of Room =  " << room1.calculateVolume() << endl;
+
+    return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.6) Write a program for multiplication of two matrices using OOP
+Solution:
+#include<iostream>
+using namespace std;
+class Matrix
+{
+	int a[10][10],m,n;
+	public:
+		void inputmatrices();
+		void outputmatrices();
+		Matrix operator*(Matrix x);
+};
+void Matrix::inputmatrices()
+{
+	int i,j;
+	cout<<"Enter order of matrix:";
+	cin>>m>>n;
+	cout<<"Enter matrix elements:";
+	for(i=0;i<m;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			cin>>a[i][j];
+		}
+	}
+}
+void Matrix::outputmatrices()
+{ 
+	int i,j;
+	for(i=0;i<m;i++)
+	{ 
+		for(j=0;j<n;j++)
+		{
+			cout<<a[i][j]<<"\t";
+			cout<<endl; 
+		}
+	}
+}
+
+Matrix Matrix::operator*(Matrix x)
+{ 
+	Matrix c;
+	int i,j,k;
+	if(n==x.m)
+	{ 
+		c.m=m;
+		c.n=x.n;
+		for(i=0;i<m;i++)
+		{
+			for(j=0;j<x.n;j++)
+			{ 
+				c.a[i][j]=0;
+			}
+		}
+		for(k=0;k<m;k++)
+		{
+			c.a[i][j]+=a[i][k]*x.a[k][j];
+		}
+		return c; 
+	}
+	else
+		cout<<"Multiplication is not possible.";
+}
+int main()
+{ 
+Matrix A,B,C;
+cout<<"Enter matrix A order and elements:"<<endl;
+A.inputmatrices();
+cout<<"Enter matrix B order and elements:"<<endl;
+B.inputmatrices();
+C=A*B;
+cout<<"Resulting matrix is:"<<endl;
+C.outputmatrices();
+return 0;
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.7) Write a program to find greatest of two numbers using friend function.
+Solution:
+#include<iostream>
+using namespace std;
+
+class a;
+
+class b
+{
+    int number;
+    public:
+    b(int x)
+    {
+        number=x;
+    }
+    void friend greatest(a a1,b b1);
+};
+
+class a
+{
+    int number;
+    public:
+    a(int x)
+    {
+        number=x;
+    }
+    void friend greatest(a a1,b b1);
+};
+
+void greatest(a a1,b b1)
+{
+    if(a1.number>b1.number)
+    {
+        cout<<"\n Number in class A is greatest i.e. "<<a1.number;
+    }
+    else if(a1.number<b1.number)
+    {
+        cout<<"\n Number in class B is greatest i.e. "<<b1.number;
+    }
+    else
+    {
+        cout<<"\n Number in both classes are equal";
+    }
+}
+
+int main()
+{
+    cout<<"\n\n Program to find greatest of two numbers in two different classes using friend function";
+    cout<<"\n ^^^^^^^ ^^ ^^^^ ^^^^^^^^ ^^ ^^^ ^^^^^^^ ^^ ^^^ ^^^^^^^^^ ^^^^^^^ ^^^^^ ^^^^^^ ^^^^^^^^";
+    int num;
+
+    cout<<"\n\n Enter number for class A - ";
+    cin>>num;
+    a a1(num);
+
+    cout<<"\n Enter number for class B - ";
+    cin>>num;
+    b b1(num);
+
+    greatest(a1,b1);
+    cout<<"\n";
+
+    return 0;
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q.8) Create a base class Patient (pat-name, age, sex) and IPD (ward-no, bed-no, charge-per-day). Derive a class IPD-patient from these two base classes with no-of-days-admitted attribute.
+
+Solution:
+#include<iostream>
+using namespace std;
+
+class Patient    //Base Class
+{
+        char patient_name[100];
+        int age;
+        char sex[50];
+
+        public:
+                void accept_patient_details()
+                {
+                        cout<<"\n -------------------------------";
+                        cout<<"\n Enter Patient Details";
+                        cout<<"\n -------------------------------";
+                        cout<<"\n Patient Name : ";
+                        cin>>patient_name;
+                        cout<<"\n Patient Age  :  ";
+                        cin>>age;
+                        cout<<"\n Sex          :  ";
+                        cin>>sex;
+                }
+                void display_patient_details()
+                {
+                        cout<<"\n -------------------------------";
+                        cout<<"\n Displaying Patient Details";
+                        cout<<"\n -------------------------------";
+                        cout<<"\n Patient Name  :  "<<patient_name;
+                        cout<<"\n Patient Age   :  "<<age;
+                        cout<<"\n Sex           :  "<<sex;
+                }
+};
+class IPD    //Base Class
+{
+        int ward_no;
+        int bed_no;
+        int charge_per_day;
+    public:
+        void accept_ipd_details()
+        {
+                cout<<"\n -------------------------------";
+                cout<<"\n Enter IPD Details ";
+                cout<<"\n -------------------------------";
+                cout<<"\n Ward No.        :  ";
+                cin>>ward_no;
+                cout<<"\n Bed No.         :  ";
+                cin>>bed_no;
+                cout<<"\n Charge Per Day  :  ";
+                cin>>charge_per_day;
+        }
+        void display_ipd_details()
+        {
+                cout<<"\n -------------------------------";
+                cout<<"\n Displaying IPD Details";
+                cout<<"\n -------------------------------";
+                cout<<"\n Ward No.         :  "<<ward_no;
+                cout<<"\n Bed No.          :  "<<bed_no;
+                cout<<"\n Charge Per Day   :  "<<charge_per_day;
+        }
+};
+//Class IPDPatient is derived from Class IPD and Class Patient
+class IPDPatient : public IPD, public Patient  
+{
+        int no_of_days_admitted;
+
+    public:
+        void accept_ipd_patient_details()
+        {
+                accept_patient_details();
+                accept_ipd_details();
+                cout<<"\n\n Enter No. of Days Admitted   :  ";
+                cin>>no_of_days_admitted;
+        }
+        void display_ipd_patient_details()
+        {
+                display_patient_details();
+                display_ipd_details();
+                cout<<"\n -------------------------------";
+                cout<<"\n\n No. of Days Admitted  :  "<<no_of_days_admitted;
+        }
+};
+int main()
+{
+        IPDPatient *ipdt;   // Object ipdt is created of class IPDPatient <-- Child Class
+        int i,cnt;
+        cout<<"\n Enter No. of Patient Details You Want  :  ";
+        cin>>cnt;
+        ipdt=new IPDPatient[cnt];
+        for(i=0;i<cnt;i++)
+        {
+                ipdt[i].accept_ipd_patient_details();
+                ipdt[i].display_ipd_patient_details();
+        }
+        return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.9) There are a lot of boxes laying in a room and it looks so messy when you see it. You decided to pick all the boxes and put them in a single box called Big box. After putting all the small boxes into the big box the weight is the sum of weights of all the small boxes. The Big box number will be the number next to the number of last added box. (example: Bigbox=b1+b2+b3, if b1 number is 1 and b2 number2 and b3 has 3 then Bigbox number will be 4).
+Your job is to write the Box class and create small boxes and big box objects. where the Box class has box number and weight as private attributes, getters, setters, default constructor, a constructor with two parameters(box number and weight) and also you have to write the overloaded operator '+' which adds the weight of the all small boxes and store the weight in the big box.
+
+Solution: 
+
+#include<iostream>
+#include <iomanip>
+	using namespace std;
+	
+
+	//main Box class
+class Box
+{
+private:
+	int box_number;				//variable to store box number
+	int weight;				//variable to store total weight of the box
+	
+public:
+	Box();					//default constructor
+	Box(int,int);				//constructor with two parameters
+	~Box();					//destructor
+	friend Box& operator + (const Box &lhs,const Box &rhs);				//friend function to implement operator overloading
+	void GetBoxNumberAndWeight();							//getter
+	void SetBoxNumAndWeight(int box_number,int weight);				//setter
+};
+
+
+Box::Box():Box{0,0}{}
+Box::Box(int box_number,int weight):box_number{box_number},weight{weight}{}
+Box::~Box(){}
+
+	void Box::GetBoxNumberAndWeight()				 //Getter
+	{
+	cout<<"Box number   : "<<this->box_number<<endl;
+	cout<<"Total weight : "<<this->weight<<endl;
+	}
+	void Box::SetBoxNumAndWeight(int box_number ,int weight)				//setter
+	{
+		this->box_number=box_number;
+	this->weight=weight;
+    }
+	//Implement overloaded operator here
+      Box& operator + (const Box &lhs, const Box &rhs)			   	//overloaded + operator
+      {
+	static Box temp;							//Creating a temp object of class Box .
+	temp.box_number=rhs.box_number+1;					//Giving a big box number the number after which last box added.
+	temp.weight=lhs.weight+rhs.weight;					//add all the weigjhts
+	return temp;								//return the object.
+    }
+
+
+
+	int main(void)
+{
+	Box box1;
+	cout<<"Box number and weight of Box 1 before : "<<endl;
+	box1.GetBoxNumberAndWeight();
+	box1.SetBoxNumAndWeight(1,90);
+	cout<<"Box number and weight of Box 1 after setting : "<<endl;
+	box1.GetBoxNumberAndWeight();
+	Box box2{2,30};
+	cout<<"Box number and weight of box 2 : "<<endl;
+	box2.GetBoxNumberAndWeight();
+	Box Bigbox;
+	Bigbox=box1 + box2  ;
+	cout<<"Box number and weight of Big box after addition : "<<endl;
+	Bigbox.GetBoxNumberAndWeight();
+	return 0;
+}
